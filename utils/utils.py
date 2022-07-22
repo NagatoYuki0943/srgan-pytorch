@@ -13,7 +13,7 @@ def show_result(num_epoch, G_net, imgs_lr, imgs_hr):
         for j in itertools.product(range(2)):
             ax[j].get_xaxis().set_visible(False)
             ax[j].get_yaxis().set_visible(False)
-        
+
         ax[0].cla()
         ax[0].imshow(np.transpose(test_images.cpu().numpy()[0] * 0.5 + 0.5, [1,2,0]))
 
@@ -31,10 +31,10 @@ def show_result(num_epoch, G_net, imgs_lr, imgs_hr):
 #---------------------------------------------------------#
 def cvtColor(image):
     if len(np.shape(image)) == 3 and np.shape(image)[2] == 3:
-        return image 
+        return image
     else:
         image = image.convert('RGB')
-        return image 
+        return image
 
 def preprocess_input(image, mean, std):
     image = (image/255 - mean)/std

@@ -106,13 +106,13 @@ class SRGANDataset(Dataset):
         #------------------------------------------#
         flip = self.rand()<.5
         if flip: image = image.transpose(Image.FLIP_LEFT_RIGHT)
-        
+
         rotate = self.rand()<.5
-        if rotate: 
+        if rotate:
             angle = np.random.randint(-15,15)
             a,b = w/2,h/2
             M = cv2.getRotationMatrix2D((a,b),angle,1)
-            image = cv2.warpAffine(np.array(image), M, (w,h), borderValue=[128,128,128]) 
+            image = cv2.warpAffine(np.array(image), M, (w,h), borderValue=[128,128,128])
 
         #------------------------------------------#
         #   色域扭曲
@@ -148,7 +148,7 @@ class SRGANDataset(Dataset):
 
         image   = image.crop((width1, height1, width2, height2))
         return image
-        
+
 def SRGAN_dataset_collate(batch):
     images_l = []
     images_h = []

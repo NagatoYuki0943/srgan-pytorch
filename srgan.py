@@ -19,7 +19,7 @@ class SRGAN(object):
         #-----------------------------------------------#
         #   上采样的倍数，和训练时一样
         #-----------------------------------------------#
-        "scale_factor"      : 4, 
+        "scale_factor"      : 4,
         #-------------------------------#
         #   是否使用Cuda
         #   没有GPU可以设置成False
@@ -33,7 +33,7 @@ class SRGAN(object):
     def __init__(self, **kwargs):
         self.__dict__.update(self._defaults)
         for name, value in kwargs.items():
-            setattr(self, name, value)  
+            setattr(self, name, value)
         self.generate()
 
     def generate(self):
@@ -48,7 +48,7 @@ class SRGAN(object):
             self.net = torch.nn.DataParallel(self.net)
             cudnn.benchmark = True
             self.net = self.net.cuda()
-        
+
     def generate_1x1_image(self, image):
         #---------------------------------------------------------#
         #   在这里将图像转换成RGB图像，防止灰度图在预测时报错。
@@ -59,7 +59,7 @@ class SRGAN(object):
         #   添加上batch_size维度，并进行归一化
         #---------------------------------------------------------#
         image_data  = np.expand_dims(np.transpose(preprocess_input(np.array(image, dtype='float32'), [0.5,0.5,0.5], [0.5,0.5,0.5]), [2,0,1]), 0)
-        
+
         with torch.no_grad():
             image_data = torch.from_numpy(image_data).type(torch.FloatTensor)
             if self.cuda:

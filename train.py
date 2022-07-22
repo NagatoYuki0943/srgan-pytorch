@@ -22,11 +22,13 @@ if __name__ == "__main__":
     scale_factor    = 4
     #-----------------------------------#
     #   获得输入与输出的图片的shape
+    #   lr: 低分辨率
+    #   hr: 高分辨率
     #-----------------------------------#
     lr_shape        = [96, 96]
     hr_shape        = [lr_shape[0] * scale_factor, lr_shape[1] * scale_factor]
     #--------------------------------------------------------------------------#
-    #   如果想要断点续练就将model_path设置成logs文件夹下已经训练的权值文件。 
+    #   如果想要断点续练就将model_path设置成logs文件夹下已经训练的权值文件。
     #   当model_path = ''的时候不加载整个模型的权值。
     #
     #   此处使用的是整个模型的权重，因此是在train.py进行加载的。
@@ -84,7 +86,7 @@ if __name__ == "__main__":
 
     G_model_train = G_model.train()
     D_model_train = D_model.train()
-    
+
     if Cuda:
         cudnn.benchmark = True
         G_model_train = torch.nn.DataParallel(G_model)
