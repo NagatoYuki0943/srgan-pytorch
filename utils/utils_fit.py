@@ -20,9 +20,7 @@ def fit_one_epoch(G_model_train, D_model_train, G_model, D_model, VGG_feature_mo
                 # 低分辨率图像(高分辨率采样),高分辨率原图
                 lr_images, hr_images    = batch
                 lr_images, hr_images    = torch.from_numpy(lr_images).type(torch.FloatTensor), torch.from_numpy(hr_images).type(torch.FloatTensor)
-                #-------------------------------------------#
-                #   real全为1 fake全为0
-                #-------------------------------------------#
+                # real全为1 fake全为0
                 y_real, y_fake          = torch.ones(batch_size), torch.zeros(batch_size)
                 if cuda:
                     lr_images, hr_images, y_real, y_fake  = lr_images.cuda(), hr_images.cuda(), y_real.cuda(), y_fake.cuda()
