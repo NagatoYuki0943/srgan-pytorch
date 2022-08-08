@@ -173,8 +173,9 @@ class Discriminator(nn.Module):
 
     def forward(self, x):
         batch_size = x.size(0)
-        #   [b, c, h, w] -> [b, 1, 1, 1] -> [b]
-        return torch.sigmoid(self.net(x).view(batch_size))
+        # [b, c, h, w] -> [b, 1, 1, 1] -> [b]
+        return self.net(x).view(batch_size)
+
 
 if __name__ == "__main__":
     from torchsummary import summary
